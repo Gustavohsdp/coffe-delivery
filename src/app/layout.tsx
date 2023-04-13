@@ -1,3 +1,5 @@
+import { Header } from "@/components/Header";
+import { Providers } from "@/providers";
 import { Metadata } from "next";
 import { Baloo_2, Open_Sans, Roboto } from "next/font/google";
 import { ReactNode } from "react";
@@ -73,7 +75,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       lang="pt"
       className={`${openSans.variable} ${roboto.variable} ${baloo_2.variable} scroll-smooth`}
     >
-      <body>{children}</body>
+      <body>
+        <div className="pb-28 ">
+          <Header />
+        </div>
+
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
