@@ -12,7 +12,7 @@ export function RemoveButton({ title, ...props }: RemoveButtonProps) {
       {...props}
     >
       <Trash2 size={16} className="text-purple-400" />
-      {title}
+      {title.toUpperCase()}
     </button>
   );
 }

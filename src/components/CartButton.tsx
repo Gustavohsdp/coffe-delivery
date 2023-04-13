@@ -15,7 +15,9 @@ export function CartButton({ quantityOfItems, ...props }: IconButtonProps) {
 
       {quantityOfItems && (
         <div className="bg-yellow-900 rounded-full w-5 h-5  top-[-8px] right-[-8px] absolute flex items-center justify-center">
-          <span className="text-xs font-bold text-white">{3}</span>
+          <span className="text-xs font-bold text-white">
+            {quantityOfItems}
+          </span>
         </div>
       )}
     </button>
