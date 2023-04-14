@@ -43,8 +43,8 @@ export const metadata: Metadata = {
     },
   },
   title: {
-    default: "Coffe delivery",
-    template: "%s | Coffe delivery",
+    default: "Coffe Delivery",
+    template: "%s | Coffe Delivery",
   },
   description: "E-commerce delivery coffe.",
   icons: {
@@ -76,13 +76,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className={`${openSans.variable} ${roboto.variable} ${baloo_2.variable} scroll-smooth`}
     >
       <body>
-        <div className="pb-28">
-          <Header />
-        </div>
+        <Providers>
+          <div className="pb-28">
+            <Header />
+          </div>
 
-        <div className="mx-auto max-w-[1120px]">
-          <Providers>{children}</Providers>
-        </div>
+          <div className="mx-auto max-w-[1120px]">{children}</div>
+        </Providers>
       </body>
     </html>
   );
