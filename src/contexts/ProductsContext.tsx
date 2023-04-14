@@ -35,14 +35,13 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
   function removeProductToCart(product: Product) {
     const productAddedToCart = cart?.find((item) => item.id === product.id);
 
-    if (productAddedToCart?.quantity === 0) {
+    if (productAddedToCart?.quantity === 1) {
       const updatedCart = cart?.filter((item) => item.id !== product.id);
       setCart(updatedCart);
     } else {
       const updatedCart = cart?.map((item) =>
         item.id === product.id ? { ...item, quantity: item.quantity - 1 } : item
       );
-
       setCart(updatedCart);
     }
   }
