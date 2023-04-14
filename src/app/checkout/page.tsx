@@ -1,107 +1,273 @@
+"use client";
+
 import { Button } from "@/components/Button";
 import { Cart } from "@/components/Cart";
-import { Input } from "@/components/Input";
 import { PaymentMethodSelect } from "@/components/PaymentMethodSelect";
-import { MapPin } from "lucide-react";
+import { PAYMENT_METHODS } from "@/mocks/payment-methods";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { DollarSign, MapPin } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+const schema = z.object({
+  cep: z
+    .string()
+    .regex(
+      /^\d{5}-\d{3}$/,
+      'CEP inválido. O CEP deve estar no formato "XXXXX-XXX"'
+    ),
+  address: z.string().nonempty("Requerido"),
+  number: z.string().nonempty("Requerido"),
+  complement: z.string().nonempty("Requerido"),
+  neighborhood: z.string().nonempty("Requerido"),
+  city: z.string().nonempty("Requerido"),
+  uf: z.string().min(2, "Mínimo 2 caracteres").max(2, "Máximo 2 caracteres"),
+});
+
+type FormValues = {
+  cep: string;
+  address: string;
+  number: number;
+  complement: string;
+  neighborhood: string;
+  city: string;
+  uf: string;
+};
+
+export interface PaymentMethodProps {
+  id: number;
+  method: string;
+}
 
 export default function Checkout() {
+  const [selectedPaymentMethod, setSelectedPaymentMethod] =
+    useState<PaymentMethodProps | null>(null);
+
+  const handlePaymentMethodSelect = (paymentMethod: PaymentMethodProps) => {
+    setSelectedPaymentMethod(paymentMethod);
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+  });
+
+  const onSubmit = (data: FormValues) => {
+    console.log(data);
+  };
+
+  useEffect(() => {
+    console.log(selectedPaymentMethod);
+  }, [selectedPaymentMethod]);
+
   return (
     <main className="flex justify-between flex-col">
-      <section className="w-full  flex flex-row justify-between items-start pb-32 ">
-        <div className="max-w-[640px]">
-          <h1 className="text-lg font-baloo2 text-brown-700 font-bold">
-            Complete seu pedido
-          </h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <section className="w-full  flex flex-row justify-between items-start pb-32 ">
+          <div className="max-w-[640px]">
+            <h1 className="text-lg font-baloo2 text-brown-700 font-bold">
+              Complete seu pedido
+            </h1>
 
-          <div className="bg-brown-100 py-10 px-10 rounded-md w-[640px]  mt-4 ">
-            <div>
+            <div className="bg-brown-100 py-10 px-10 rounded-md w-[640px]  mt-4 ">
+              <div>
+                <div className="flex flex-row gap-2 items-start">
+                  <MapPin size={22} color="#C47F17" />
+                  <div>
+                    <p className="text-base text-brown-700">
+                      Endereço de Entrega
+                    </p>
+                    <span className="text-sm text-brown-600">
+                      Informe o endereço onde deseja receber seu pedido
+                    </span>
+                  </div>
+                </div>
+
+                <div className="mt-8 flex flex-col gap-4">
+                  <input
+                    type="text"
+                    id="cep"
+                    {...register("cep")}
+                    placeholder="CEP"
+                    className={` 
+                    w-[200px]
+                    h-11 rounded-[4px] form-input bg-brown-200 p-3 border-[1px] border-solid border-brown-300 focus:outline-none focus:border-yellow-900 font-normal text-brown-600 text-sm`}
+                  />
+
+                  {errors.cep && (
+                    <p className="text-red-500">{errors.cep.message}</p>
+                  )}
+
+                  <input
+                    type="text"
+                    id="address"
+                    {...register("address")}
+                    placeholder="Rua"
+                    className={` 
+                    w-full
+                    h-11 rounded-[4px] form-input bg-brown-200 p-3 border-[1px] border-solid border-brown-300 focus:outline-none focus:border-yellow-900 font-normal text-brown-600 text-sm`}
+                  />
+
+                  {errors.address && (
+                    <p className="text-red-500">{errors.address.message}</p>
+                  )}
+
+                  <div className=" flex flex-row items-center gap-4">
+                    <div className="flex flex-col gap-1">
+                      <input
+                        type="text"
+                        id="number"
+                        {...register("number")}
+                        placeholder="Número"
+                        className={` 
+                    w-[200px]
+                    h-11 rounded-[4px] form-input bg-brown-200 p-3 border-[1px] border-solid border-brown-300 focus:outline-none focus:border-yellow-900 font-normal text-brown-600 text-sm`}
+                      />
+
+                      {errors.number && (
+                        <p className="text-red-500">{errors.number.message}</p>
+                      )}
+                    </div>
+
+                    <div className="w-full flex flex-col gap-1">
+                      <input
+                        type="text"
+                        id="complement"
+                        {...register("complement")}
+                        placeholder="Complemento"
+                        className={` 
+                    w-full
+                    h-11 rounded-[4px] form-input bg-brown-200 p-3 border-[1px] border-solid border-brown-300 focus:outline-none focus:border-yellow-900 font-normal text-brown-600 text-sm`}
+                      />
+
+                      {errors.complement && (
+                        <p className="text-red-500">
+                          {errors.complement.message}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="w-full flex flex-row items-center justify-between gap-4">
+                    <div className="flex flex-col gap-1">
+                      <input
+                        type="text"
+                        id="neighborhood"
+                        {...register("neighborhood")}
+                        placeholder="Bairro"
+                        className={` 
+                    w-[200px]
+                    h-11 rounded-[4px] form-input bg-brown-200 p-3 border-[1px] border-solid border-brown-300 focus:outline-none focus:border-yellow-900 font-normal text-brown-600 text-sm`}
+                      />
+
+                      {errors.neighborhood && (
+                        <p className="text-red-500">
+                          {errors.neighborhood.message}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="w-full flex flex-col gap-1">
+                      <input
+                        type="text"
+                        id="city"
+                        {...register("city")}
+                        placeholder="Cidade"
+                        className={`w-full h-11 rounded-[4px] form-input bg-brown-200 p-3 border-[1px] border-solid border-brown-300 focus:outline-none focus:border-yellow-900 font-normal text-brown-600 text-sm`}
+                      />
+
+                      {errors.city && (
+                        <p className="text-red-500">{errors.city.message}</p>
+                      )}
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <input
+                        type="text"
+                        id="uf"
+                        {...register("uf")}
+                        placeholder="UF"
+                        className={` 
+                    w-[60px]
+                    h-11 rounded-[4px] form-input bg-brown-200 p-3 border-[1px] border-solid border-brown-300 focus:outline-none focus:border-yellow-900 font-normal text-brown-600 text-sm`}
+                      />
+
+                      {errors.uf && (
+                        <p className="text-red-500">{errors.uf.message}</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-brown-100 py-10 px-10 rounded-md w-[640px]  mt-3">
               <div className="flex flex-row gap-2 items-start">
-                <MapPin size={22} color="#C47F17" />
+                <DollarSign size={22} color="#8047F8" />
                 <div>
-                  <p className="text-base text-brown-700">
-                    Endereço de Entrega
-                  </p>
+                  <p className="text-base text-brown-700">Pagamento</p>
                   <span className="text-sm text-brown-600">
-                    Informe o endereço onde deseja receber seu pedido
+                    O pagamento é feito na entrega. Escolha a forma que deseja
+                    pagar
                   </span>
                 </div>
               </div>
 
-              <div className="mt-8 flex flex-col gap-4">
-                <Input placeholder="CEP" sizeInput="200px" />
-                <Input placeholder="Rua" />
+              <div className="mt-8 gap-3 flex justify-between items-center">
+                {PAYMENT_METHODS.map((method) => (
+                  <PaymentMethodSelect
+                    key={method.id}
+                    paymentMethod={method}
+                    onSelect={handlePaymentMethodSelect}
+                    isSelected={method.id === selectedPaymentMethod?.id}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
 
-                <div className="flex flex-row items-center justify-between gap-4">
-                  <Input placeholder="Número" sizeInput="200px" />
-                  <Input placeholder="Complemento" />
+          <div className="max-w-[448px]">
+            <h1 className="text-lg font-baloo2 text-brown-700 font-bold">
+              Cafés selecionados
+            </h1>
+
+            <div className="bg-brown-100 py-10 px-10 w-[448px] mt-4 rounded-tr-[36px] rounded-tl-md  rounded-bl-[36px]  rounded-br-md">
+              {[1, 2].map((cart) => (
+                <div key={cart}>
+                  <Cart />
+
+                  <div className="border-[1px] border-solid border-brown-300 mt-6 mb-6" />
+                </div>
+              ))}
+
+              <div className="flex flex-col gap-3">
+                <div className="flex flex-row justify-between ">
+                  <p className="text-sm text-brown-600">Total de itens</p>
+                  <span className="text-sm text-brown-600">R$ 29,70</span>
                 </div>
 
-                <div className="flex flex-row items-center justify-between gap-4">
-                  <Input placeholder="Bairro" sizeInput="200px" />
-                  <Input placeholder="Complemento" />
-                  <Input placeholder="UF" sizeInput="60px" />
+                <div className="flex flex-row justify-between">
+                  <p className="text-sm text-brown-600">Entrega</p>
+                  <span className="text-sm text-brown-600">R$ 3,50</span>
+                </div>
+                <div className="flex flex-row justify-between">
+                  <p className="text-xl text-brown-700 font-bold">Total</p>
+                  <span className="text-xl text-brown-700 font-bold">
+                    R$ 33,20
+                  </span>
                 </div>
               </div>
+              <div className="mt-6 w-full">
+                <Button type="submit" title="Confirmar pedido" />
+              </div>
             </div>
           </div>
-
-          <div className="bg-brown-100 py-10 px-10 rounded-md w-[640px]  mt-3">
-            <div className="flex flex-row gap-2 items-start">
-              <MapPin size={22} color="#C47F17" />
-              <div>
-                <p className="text-base text-brown-700">Pagamento</p>
-                <span className="text-sm text-brown-600">
-                  O pagamento é feito na entrega. Escolha a forma que deseja
-                  pagar
-                </span>
-              </div>
-            </div>
-
-            <div className="mt-8 gap-3 flex justify-between items-center">
-              <PaymentMethodSelect title="Cartão de débito" />
-              <PaymentMethodSelect title="Cartão de crédito" />
-              <PaymentMethodSelect title="Dinheiro" />
-            </div>
-          </div>
-        </div>
-
-        <div className="max-w-[448px]">
-          <h1 className="text-lg font-baloo2 text-brown-700 font-bold">
-            Cafés selecionados
-          </h1>
-
-          <div className="bg-brown-100 py-10 px-10 w-[448px] mt-4 rounded-tr-[36px] rounded-tl-md  rounded-bl-[36px]  rounded-br-md">
-            {[1, 2].map((cart) => (
-              <div key={cart}>
-                <Cart />
-
-                <div className="border-[1px] border-solid border-brown-300 mt-6 mb-6" />
-              </div>
-            ))}
-
-            <div className="flex flex-col gap-3">
-              <div className="flex flex-row justify-between ">
-                <p className="text-sm text-brown-600">Total de itens</p>
-                <span className="text-sm text-brown-600">R$ 29,70</span>
-              </div>
-
-              <div className="flex flex-row justify-between">
-                <p className="text-sm text-brown-600">Entrega</p>
-                <span className="text-sm text-brown-600">R$ 3,50</span>
-              </div>
-              <div className="flex flex-row justify-between">
-                <p className="text-xl text-brown-700 font-bold">Total</p>
-                <span className="text-xl text-brown-700 font-bold">
-                  R$ 33,20
-                </span>
-              </div>
-            </div>
-            <div className="mt-6 w-full">
-              <Button title="Confirmar pedido" />
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      </form>
     </main>
   );
 }
