@@ -25,7 +25,7 @@ const schema = z.object({
   complement: z.string().nonempty("Requerido"),
   neighborhood: z.string().nonempty("Requerido"),
   city: z.string().nonempty("Requerido"),
-  uf: z.string().min(2, "Mínimo 2 caracteres").max(2, "Máximo 2 caracteres"),
+  uf: z.string().min(2, "Requerido").max(2, "Requerido"),
 });
 
 type FormValues = {
@@ -106,38 +106,46 @@ export default function Checkout() {
                 </div>
 
                 <div className="mt-8 flex flex-col gap-4">
-                  <input
-                    type="text"
-                    id="cep"
-                    {...register("cep")}
-                    placeholder="CEP"
-                    className={` 
+                  <div className="w-full flex flex-col gap-1">
+                    <input
+                      type="number"
+                      id="cep"
+                      {...register("cep")}
+                      placeholder="CEP"
+                      className={` 
                     w-[200px]
                     h-11 rounded-[4px] form-input bg-brown-200 p-3 border-[1px] border-solid border-brown-300 focus:outline-none focus:border-yellow-900 font-normal text-brown-600 text-sm`}
-                  />
+                    />
 
-                  {errors.cep && (
-                    <p className="text-red-500">{errors.cep.message}</p>
-                  )}
+                    {errors.cep && (
+                      <p className="text-red-500 text-xs">
+                        {errors.cep.message}
+                      </p>
+                    )}
+                  </div>
 
-                  <input
-                    type="text"
-                    id="address"
-                    {...register("address")}
-                    placeholder="Rua"
-                    className={` 
+                  <div className=" flex flex-col gap-1">
+                    <input
+                      type="text"
+                      id="address"
+                      {...register("address")}
+                      placeholder="Rua"
+                      className={` 
                     w-full
                     h-11 rounded-[4px] form-input bg-brown-200 p-3 border-[1px] border-solid border-brown-300 focus:outline-none focus:border-yellow-900 font-normal text-brown-600 text-sm`}
-                  />
+                    />
 
-                  {errors.address && (
-                    <p className="text-red-500">{errors.address.message}</p>
-                  )}
+                    {errors.address && (
+                      <p className="text-red-500 text-xs">
+                        {errors.address.message}
+                      </p>
+                    )}
+                  </div>
 
                   <div className=" flex flex-row items-center gap-4">
                     <div className="flex flex-col gap-1">
                       <input
-                        type="text"
+                        type="number"
                         id="number"
                         {...register("number")}
                         placeholder="Número"
@@ -147,7 +155,9 @@ export default function Checkout() {
                       />
 
                       {errors.number && (
-                        <p className="text-red-500">{errors.number.message}</p>
+                        <p className="text-red-500 text-xs">
+                          {errors.number.message}
+                        </p>
                       )}
                     </div>
 
@@ -163,7 +173,7 @@ export default function Checkout() {
                       />
 
                       {errors.complement && (
-                        <p className="text-red-500">
+                        <p className="text-red-500 text-xs">
                           {errors.complement.message}
                         </p>
                       )}
@@ -183,7 +193,7 @@ export default function Checkout() {
                       />
 
                       {errors.neighborhood && (
-                        <p className="text-red-500">
+                        <p className="text-red-500 text-xs">
                           {errors.neighborhood.message}
                         </p>
                       )}
@@ -199,7 +209,9 @@ export default function Checkout() {
                       />
 
                       {errors.city && (
-                        <p className="text-red-500">{errors.city.message}</p>
+                        <p className="text-red-500 text-xs">
+                          {errors.city.message}
+                        </p>
                       )}
                     </div>
 
@@ -215,7 +227,9 @@ export default function Checkout() {
                       />
 
                       {errors.uf && (
-                        <p className="text-red-500">{errors.uf.message}</p>
+                        <p className="text-red-500 text-xs w-[60px]">
+                          {errors.uf.message}
+                        </p>
                       )}
                     </div>
                   </div>
