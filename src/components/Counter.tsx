@@ -1,22 +1,32 @@
 "use client";
 
+import { Product } from "@/@types/product";
+import { useProducts } from "@/hooks/useProducts";
 import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
 
-export function Counter() {
-  const [counter, setCounter] = useState(0);
+interface CounterProps {
+  product: Product;
+}
+
+export function Counter({ product }: CounterProps) {
+  const [counter, setCounter] = useState(product.quantity);
+  const { addProductToCart, removeProductToCart } = useProducts();
 
   function handleDecreaseCount() {
     setCounter((prevState) => prevState - 1);
+    removeProductToCart(product);
   }
 
   function handleIncreaseCount() {
     setCounter((prevState) => prevState + 1);
+    addProductToCart(product);
   }
 
   return (
     <div className="bg-brown-400 w-[72px] h-8 rounded-md gap-1 flex justify-center items-center">
       <button
+        type="button"
         onClick={handleDecreaseCount}
         className="text-purple-400 hover:text-purple-900"
       >
@@ -26,6 +36,7 @@ export function Counter() {
         {counter}
       </span>
       <button
+        type="button"
         onClick={handleIncreaseCount}
         className="text-purple-400 hover:text-purple-900"
       >

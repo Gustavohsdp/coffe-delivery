@@ -1,22 +1,32 @@
+import { Product } from "@/@types/product";
+import { useProducts } from "@/hooks/useProducts";
 import Image from "next/image";
-import cafeGelado from "../../public/assets/images/Café Gelado.png";
 import { Counter } from "./Counter";
 import { RemoveButton } from "./RemoveButton";
 
-export function Cart() {
+interface CartProps {
+  product: Product;
+}
+
+export function Cart({ product }: CartProps) {
+  const { removeUniqueProductToCart } = useProducts();
+
   return (
     <div className="w-[368px] h-20 py-2 px-1 bg-brown-100 rounded-md flex flex-row justify-between">
       <div className="flex flex-row gap-5">
-        <Image alt="café" src={cafeGelado} width="64" height="64" />
+        <Image alt="café" src={product.image} width="64" height="64" />
 
         <div className="flex flex-col gap-2">
           <p className="text-base font-normal text-brown-700">
-            Expresso Tradicional
+            {product.title}
           </p>
 
           <div className="flex flex-row gap-2">
-            <Counter />
-            <RemoveButton title="remover" />
+            <Counter product={product} />
+            <RemoveButton
+              title="remover"
+              onClick={() => removeUniqueProductToCart(product)}
+            />
           </div>
         </div>
       </div>
