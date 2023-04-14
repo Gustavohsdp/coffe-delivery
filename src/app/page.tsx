@@ -74,7 +74,7 @@ export default function Home() {
 
         <div className="grid grid-cols-4 mt-14 gap-8 ">
           {COFFES.map((coffe) => (
-            <CardCatalog key={coffe.id} coffe={coffe} />
+            <CardCatalog key={coffe.id} product={coffe} />
           ))}
         </div>
       </section>

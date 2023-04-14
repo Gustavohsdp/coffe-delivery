@@ -3,10 +3,13 @@
 import { Button } from "@/components/Button";
 import { Cart } from "@/components/Cart";
 import { PaymentMethodSelect } from "@/components/PaymentMethodSelect";
+import { useProducts } from "@/hooks/useProducts";
 import { PAYMENT_METHODS } from "@/mocks/payment-methods";
+import { formatCurrency } from "@/utils/formatCurrency";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DollarSign, MapPin } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -44,9 +47,26 @@ export default function Checkout() {
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState<PaymentMethodProps | null>(null);
 
+  const { cart } = useProducts();
+
+  const router = useRouter();
+
   const handlePaymentMethodSelect = (paymentMethod: PaymentMethodProps) => {
     setSelectedPaymentMethod(paymentMethod);
   };
+
+  function handleNavigateSuccessPage() {
+    router.push("/success");
+  }
+
+  const totalItens = cart.reduce((accumulator, item) => {
+    const numericValue = parseFloat(item.value.replace(",", "."));
+    return accumulator + numericValue * item.quantity;
+  }, 0);
+
+  const SHIPPING_VALUE = "3,50";
+
+  const TOTAL_VALUE_CART = totalItens + parseFloat(SHIPPING_VALUE);
 
   const {
     register,
@@ -58,11 +78,9 @@ export default function Checkout() {
 
   const onSubmit = (data: FormValues) => {
     console.log(data);
-  };
 
-  useEffect(() => {
-    console.log(selectedPaymentMethod);
-  }, [selectedPaymentMethod]);
+    handleNavigateSuccessPage();
+  };
 
   return (
     <main className="flex justify-between flex-col">
@@ -236,9 +254,9 @@ export default function Checkout() {
             </h1>
 
             <div className="bg-brown-100 py-10 px-10 w-[448px] mt-4 rounded-tr-[36px] rounded-tl-md  rounded-bl-[36px]  rounded-br-md">
-              {[1, 2].map((cart) => (
-                <div key={cart}>
-                  <Cart />
+              {cart.map((cart) => (
+                <div key={cart.id}>
+                  <Cart product={cart} />
 
                   <div className="border-[1px] border-solid border-brown-300 mt-6 mb-6" />
                 </div>
@@ -247,17 +265,21 @@ export default function Checkout() {
               <div className="flex flex-col gap-3">
                 <div className="flex flex-row justify-between ">
                   <p className="text-sm text-brown-600">Total de itens</p>
-                  <span className="text-sm text-brown-600">R$ 29,70</span>
+                  <span className="text-sm text-brown-600">
+                    {formatCurrency(totalItens.toFixed(2))}
+                  </span>
                 </div>
 
                 <div className="flex flex-row justify-between">
                   <p className="text-sm text-brown-600">Entrega</p>
-                  <span className="text-sm text-brown-600">R$ 3,50</span>
+                  <span className="text-sm text-brown-600">
+                    {formatCurrency(SHIPPING_VALUE)}
+                  </span>
                 </div>
                 <div className="flex flex-row justify-between">
                   <p className="text-xl text-brown-700 font-bold">Total</p>
                   <span className="text-xl text-brown-700 font-bold">
-                    R$ 33,20
+                    {formatCurrency(String(TOTAL_VALUE_CART))}
                   </span>
                 </div>
               </div>
