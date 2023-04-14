@@ -298,7 +298,11 @@ export default function Checkout() {
                 </div>
               </div>
               <div className="mt-6 w-full">
-                <Button type="submit" title="Confirmar pedido" />
+                <Button
+                  type="submit"
+                  title="Confirmar pedido"
+                  isBlocked={cart.length === 0}
+                />
               </div>
             </div>
           </div>
