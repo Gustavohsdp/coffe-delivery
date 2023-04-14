@@ -1,4 +1,5 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
+import { fontFamily } from 'tailwindcss/defaultTheme';
 
 export default {
   content: [
@@ -32,6 +33,10 @@ export default {
           700: '#403937',
           900: '#272221',
         },
+      },
+      fontFamily: {
+        sans: ['var(--font-open-sans)', 'sans-serif', ...fontFamily.sans],
+        baloo2: ['var(--font-baloo_2)', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
