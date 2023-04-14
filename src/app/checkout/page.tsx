@@ -64,7 +64,7 @@ export default function Checkout() {
     return accumulator + numericValue * item.quantity;
   }, 0);
 
-  const SHIPPING_VALUE = "3,50";
+  const SHIPPING_VALUE = "3.50";
 
   const TOTAL_VALUE_CART = totalItens + parseFloat(SHIPPING_VALUE);
 
