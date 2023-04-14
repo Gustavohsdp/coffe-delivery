@@ -22,7 +22,7 @@ export function PaymentMethodSelect({
       {...props}
     >
       <CreditCard size={16} className="text-purple-400" />
-      {title}
+      {title.toUpperCase()}
     </button>
   );
 }
