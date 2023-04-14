@@ -70,9 +70,11 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
     const storage = localStorage.getItem("@coffe-delivery");
     const cartStorage = storage && JSON.parse(storage);
 
-    if (cartStorage.length > 0) {
-      cartStorage?.forEach((item: Product) => addProductToCart(item, true));
-    }
+    // if (cartStorage.length > 0) {
+    //   cartStorage?.forEach((item: Product) => addProductToCart(item, true));
+    // }
+
+    setCart(cartStorage);
   }, []);
 
   return (
