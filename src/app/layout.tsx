@@ -76,11 +76,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className={`${openSans.variable} ${roboto.variable} ${baloo_2.variable} scroll-smooth`}
     >
       <body>
-        <div className="pb-28 ">
+        <div className="pb-28">
           <Header />
         </div>
 
-        <Providers>{children}</Providers>
+        <div className="mx-auto max-w-[1120px]">
+          <Providers>{children}</Providers>
+        </div>
       </body>
     </html>
   );
