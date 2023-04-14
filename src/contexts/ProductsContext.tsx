@@ -58,10 +58,11 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
   function removeUniqueProductToCart(product: Product) {
     const updatedCart = cart?.filter((item) => item.id !== product.id);
     setCart(updatedCart);
+    localStorage.setItem("@coffe-delivery", JSON.stringify(updatedCart));
   }
 
   useEffect(() => {
-    if (cart.length > 0) {
+    if (cart?.length > 0) {
       localStorage.setItem("@coffe-delivery", JSON.stringify(cart));
     }
   }, [cart]);

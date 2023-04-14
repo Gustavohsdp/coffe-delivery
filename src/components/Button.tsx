@@ -10,7 +10,7 @@ export function Button({ title, isBlocked = false, ...props }: ButtonProps) {
     <button
       className={`${
         isBlocked
-          ? "bg-gray-400 hover:bg-gray-500 cursor-not-allowed"
+          ? "bg-zinc-400 cursor-not-allowed"
           : "bg-yellow-400 hover:bg-yellow-900"
       } rounded-md py-3 px-2 min-w-[132px] w-full font-bold text-white text-sm`}
       {...props}

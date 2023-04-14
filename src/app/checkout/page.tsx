@@ -301,7 +301,7 @@ export default function Checkout() {
                 <Button
                   type="submit"
                   title="Confirmar pedido"
-                  isBlocked={cart.length === 0}
+                  isBlocked={cart?.length === 0}
                 />
               </div>
             </div>

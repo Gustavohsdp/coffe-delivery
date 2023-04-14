@@ -75,7 +75,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       lang="pt"
       className={`${openSans.variable} ${roboto.variable} ${baloo_2.variable} scroll-smooth`}
     >
-      <body>
+      <body className="bg-background">
         <Providers>
           <div className="pb-28">
             <Header />
