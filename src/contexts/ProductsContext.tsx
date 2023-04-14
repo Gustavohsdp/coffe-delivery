@@ -18,17 +18,26 @@ const ProductsContext = createContext({} as IProductsContextData);
 const ProductsProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<Product[]>([]);
 
-  function addProductToCart(product: Product) {
+  function addProductToCart(product: Product, storage?: boolean) {
     const productAlreadyAdd = cart?.find((item) => item.id === product.id);
 
     if (productAlreadyAdd) {
       const updatedCart = cart?.map((item) =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        item.id === product.id
+          ? {
+              ...item,
+              quantity: item.quantity + 1,
+            }
+          : item
       );
       setCart(updatedCart);
     } else {
-      const newProduct = { ...product, quantity: 1 };
-      setCart([...cart, newProduct]);
+      if (storage) {
+        setCart([...cart, product]);
+      } else {
+        const newProduct = { ...product, quantity: 1 };
+        setCart([...cart, newProduct]);
+      }
     }
   }
 
@@ -52,8 +61,17 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
   }
 
   useEffect(() => {
-    console.log(cart);
+    if (cart.length > 0) {
+      localStorage.setItem("@coffe-delivery", JSON.stringify(cart));
+    }
   }, [cart]);
+
+  useEffect(() => {
+    const storage = localStorage.getItem("@coffe-delivery");
+    const cartStorage = storage && JSON.parse(storage);
+
+    cartStorage.forEach((item: Product) => addProductToCart(item, true));
+  }, []);
 
   return (
     <ProductsContext.Provider
