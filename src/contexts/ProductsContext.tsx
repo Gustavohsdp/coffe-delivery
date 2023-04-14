@@ -1,7 +1,7 @@
 "use client";
 
 import { Product } from "@/@types/product";
-import { createContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useState, type ReactNode } from "react";
 
 interface IProductsContextData {
   // state
@@ -58,25 +58,24 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
   function removeUniqueProductToCart(product: Product) {
     const updatedCart = cart?.filter((item) => item.id !== product.id);
     setCart(updatedCart);
-    localStorage.setItem("@coffe-delivery", JSON.stringify(updatedCart));
   }
 
-  useEffect(() => {
-    if (cart?.length > 0) {
-      localStorage.setItem("@coffe-delivery", JSON.stringify(cart));
-    }
-  }, [cart]);
+  // useEffect(() => {
+  //   if (cart?.length > 0) {
+  //     localStorage.setItem("@coffe-delivery", JSON.stringify(cart));
+  //   }
+  // }, [cart]);
 
-  useEffect(() => {
-    const storage = localStorage.getItem("@coffe-delivery");
-    const cartStorage = storage && JSON.parse(storage);
+  // useEffect(() => {
+  //   const storage = localStorage.getItem("@coffe-delivery");
+  //   const cartStorage = storage && JSON.parse(storage);
 
-    // if (cartStorage.length > 0) {
-    //   cartStorage?.forEach((item: Product) => addProductToCart(item, true));
-    // }
+  //   if (cartStorage.length > 0) {
+  //     cartStorage?.forEach((item: Product) => addProductToCart(item, true));
+  //   }
 
-    setCart(cartStorage);
-  }, []);
+  //   setCart(cartStorage);
+  // }, []);
 
   return (
     <ProductsContext.Provider
