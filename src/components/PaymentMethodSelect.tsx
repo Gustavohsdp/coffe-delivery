@@ -20,7 +20,7 @@ export function PaymentMethodSelect({
       type="button"
       className={`bg-brown-300 ${
         !isSelected && "hover:bg-brown-400"
-      }  rounded-md h-14 min-w-[178px] font-normal text-brown-700 text-xs flex flex-row items-center gap-3 justify-center ${
+      } w-full rounded-md h-14 min-w-[178px] font-normal text-brown-700 text-xs flex flex-row items-center gap-3 justify-center ${
         isSelected && " border-[1px] border-solid border-purple-600"
       }`}
       onClick={() => onSelect(paymentMethod)}

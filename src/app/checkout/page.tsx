@@ -85,13 +85,13 @@ export default function Checkout() {
   return (
     <main className="flex justify-between flex-col">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <section className="w-full  flex flex-row justify-between items-start pb-32 ">
-          <div className="max-w-[640px]">
+        <section className="w-full flex flex-col md:flex-row justify-between items-start pb-32 px-4 lg:px-0">
+          <div className="w-full md:max-w-[640px]">
             <h1 className="text-lg font-baloo2 text-brown-700 font-bold">
               Complete seu pedido
             </h1>
 
-            <div className="bg-brown-100 py-10 px-10 rounded-md w-[640px]  mt-4 ">
+            <div className="bg-brown-100 py-10 px-10 rounded-md w-full md:w-[640px]  mt-4 ">
               <div>
                 <div className="flex flex-row gap-2 items-start">
                   <MapPin size={22} color="#C47F17" />
@@ -113,7 +113,7 @@ export default function Checkout() {
                       {...register("cep")}
                       placeholder="CEP"
                       className={` 
-                    w-[200px]
+                    w-full md:w-[200px]
                     h-11 rounded-[4px] form-input bg-brown-200 p-3 border-[1px] border-solid border-brown-300 focus:outline-none focus:border-yellow-900 font-normal text-brown-600 text-sm`}
                     />
 
@@ -142,15 +142,15 @@ export default function Checkout() {
                     )}
                   </div>
 
-                  <div className=" flex flex-row items-center gap-4">
-                    <div className="flex flex-col gap-1">
+                  <div className=" flex flex-col md:flex-row items-center gap-4">
+                    <div className="w-full flex flex-col gap-1">
                       <input
                         type="number"
                         id="number"
                         {...register("number")}
                         placeholder="Número"
                         className={` 
-                    w-[200px]
+                    w-full md:w-[200px]
                     h-11 rounded-[4px] form-input bg-brown-200 p-3 border-[1px] border-solid border-brown-300 focus:outline-none focus:border-yellow-900 font-normal text-brown-600 text-sm`}
                       />
 
@@ -180,15 +180,15 @@ export default function Checkout() {
                     </div>
                   </div>
 
-                  <div className="w-full flex flex-row items-center justify-between gap-4">
-                    <div className="flex flex-col gap-1">
+                  <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div className="w-full flex flex-col gap-1">
                       <input
                         type="text"
                         id="neighborhood"
                         {...register("neighborhood")}
                         placeholder="Bairro"
                         className={` 
-                    w-[200px]
+                        w-full md:w-[200px]
                     h-11 rounded-[4px] form-input bg-brown-200 p-3 border-[1px] border-solid border-brown-300 focus:outline-none focus:border-yellow-900 font-normal text-brown-600 text-sm`}
                       />
 
@@ -215,14 +215,14 @@ export default function Checkout() {
                       )}
                     </div>
 
-                    <div className="flex flex-col gap-1">
+                    <div className="w-full flex flex-col gap-1">
                       <input
                         type="text"
                         id="uf"
                         {...register("uf")}
                         placeholder="UF"
                         className={` 
-                    w-[60px]
+                    w-full md:w-[60px]
                     h-11 rounded-[4px] form-input bg-brown-200 p-3 border-[1px] border-solid border-brown-300 focus:outline-none focus:border-yellow-900 font-normal text-brown-600 text-sm`}
                       />
 
@@ -237,7 +237,7 @@ export default function Checkout() {
               </div>
             </div>
 
-            <div className="bg-brown-100 py-10 px-10 rounded-md w-[640px]  mt-3">
+            <div className="bg-brown-100 py-10 px-10 rounded-md w-full md:w-[640px]  mt-3">
               <div className="flex flex-row gap-2 items-start">
                 <DollarSign size={22} color="#8047F8" />
                 <div>
@@ -249,7 +249,7 @@ export default function Checkout() {
                 </div>
               </div>
 
-              <div className="mt-8 gap-3 flex justify-between items-center">
+              <div className="mt-8 gap-3 flex flex-col md:flex-row justify-between items-center">
                 {PAYMENT_METHODS.map((method) => (
                   <PaymentMethodSelect
                     key={method.id}
@@ -262,17 +262,17 @@ export default function Checkout() {
             </div>
           </div>
 
-          <div className="max-w-[448px]">
+          <div className="w-full md:max-w-[448px] mt-5 md:mt-0">
             <h1 className="text-lg font-baloo2 text-brown-700 font-bold">
               Cafés selecionados
             </h1>
 
-            <div className="bg-brown-100 py-10 px-10 w-[448px] mt-4 rounded-tr-[36px] rounded-tl-md  rounded-bl-[36px]  rounded-br-md">
+            <div className="bg-brown-100 py-10 px-10 w-full md:w-[448px] mt-4 rounded-tr-[36px] rounded-tl-md  rounded-bl-[36px]  rounded-br-md">
               {cart.map((cart) => (
                 <div key={cart.id}>
                   <Cart product={cart} />
 
-                  <div className="border-[1px] border-solid border-brown-300 mt-6 mb-6" />
+                  <div className="border-[1px] border-solid border-brown-300 mt-9 md:mt-6 mb-6" />
                 </div>
               ))}
 
