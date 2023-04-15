@@ -10,7 +10,7 @@ interface CardCatalogProps {
 
 export function CardCatalog({ product }: CardCatalogProps) {
   return (
-    <div className="bg-brown-100 w-64 h-80  rounded-es-[36px] rounded-tr-[36px] rounded-tl-md px-5  rounded-br-md relative">
+    <div className="bg-brown-100 w-full h-80  rounded-es-[36px] rounded-tr-[36px] rounded-tl-md px-5  rounded-br-md relative">
       <div className="absolute top-[-20px] left-16">
         <Image alt="café" src={product.image} width="120" height="120" />
       </div>

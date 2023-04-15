@@ -13,8 +13,8 @@ import packagingImg from "../../public/icons/packaging.svg";
 export default function Home() {
   return (
     <main className="flex justify-between flex-col">
-      <section className="w-full h-[544px] flex flex-row justify-between items-center ">
-        <div className="max-w-[588px]">
+      <section className="w-full flex-col-reverse  md:flex-row  md:h-[544px] flex justify-between items-center px-4 lg:px-0">
+        <div className="max-w-[588px] ">
           <div className="flex flex-col gap-4">
             <h1 className="font-extrabold font-baloo2 text-5xl text-brown-900">
               Encontre o café perfeito para qualquer hora do dia
@@ -25,8 +25,8 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-col gap-5">
-            <div className="grid grid-cols-2 mt-16">
+          <div className="flex flex-col gap-2 md:gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-6 md:mt-16">
               <div className="flex items-center gap-3">
                 <Image alt="cart" src={cartImg} height={32} width={32} />
 
@@ -43,7 +43,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div className="flex items-center gap-3">
                 <Image alt="cart" src={deliveryImg} height={32} width={32} />
 
@@ -62,17 +62,17 @@ export default function Home() {
           </div>
         </div>
 
-        <div>
+        <div className="pb-6 md:pb-0">
           <Image src={coffeMainImg} alt="Coffe main" width={476} height={360} />
         </div>
       </section>
 
-      <section className="py-8 pb-32">
+      <section className="py-8 pb-32 px-4 lg:px-0">
         <h1 className="text-3xl font-baloo2 font-bold text-brown-700">
           Nossos cafés
         </h1>
 
-        <div className="grid grid-cols-4 mt-14 gap-8 ">
+        <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 mt-14 gap-8 ">
           {COFFES.map((coffe) => (
             <CardCatalog key={coffe.id} product={coffe} />
           ))}
