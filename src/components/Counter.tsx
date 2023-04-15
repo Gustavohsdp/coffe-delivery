@@ -14,8 +14,10 @@ export function Counter({ product }: CounterProps) {
   const { addProductToCart, removeProductToCart } = useProducts();
 
   function handleDecreaseCount() {
-    setCounter((prevState) => prevState - 1);
-    removeProductToCart(product);
+    if (counter >= 1) {
+      setCounter((prevState) => prevState - 1);
+      removeProductToCart(product);
+    }
   }
 
   function handleIncreaseCount() {
@@ -27,8 +29,13 @@ export function Counter({ product }: CounterProps) {
     <div className="bg-brown-400 w-[72px] h-8 rounded-md gap-1 flex justify-center items-center">
       <button
         type="button"
+        disabled={counter === 0}
         onClick={handleDecreaseCount}
-        className="text-purple-400 hover:text-purple-900"
+        className={`${
+          counter === 0
+            ? "text-gray-400 cursor-not-allowed"
+            : "text-purple-400 hover:text-purple-900"
+        } `}
       >
         <Minus size={14} />
       </button>
