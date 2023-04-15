@@ -62,7 +62,7 @@ export default function Success() {
           </div>
         </div>
 
-        <div className="pb-32 md:pb-0">
+        <div className="pb-32 mt-4 md:mt-0 md:pb-0">
           <Image
             alt="cart"
             src={deliveryIllustration}
