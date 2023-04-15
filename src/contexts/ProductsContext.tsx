@@ -1,22 +1,26 @@
 "use client";
 
 import { Product } from "@/@types/product";
-import { createContext, useState, type ReactNode } from "react";
+import { COFFES } from "@/mocks/coffes";
+import { createContext, useEffect, useState, type ReactNode } from "react";
 
 interface IProductsContextData {
   // state
   cart: Product[];
+  products: Product[];
 
   // functions
   addProductToCart: (product: Product) => void;
   removeProductToCart: (product: Product) => void;
   removeUniqueProductToCart: (product: Product) => void;
+  productList: () => void;
 }
 
 const ProductsContext = createContext({} as IProductsContextData);
 
 const ProductsProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   function addProductToCart(product: Product, storage?: boolean) {
     const productAlreadyAdd = cart?.find((item) => item.id === product.id);
@@ -60,6 +64,24 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
     setCart(updatedCart);
   }
 
+  function productList() {
+    const updatedProducts = COFFES.map((product) => {
+      const cartItem = cart.find((item) => item.id === product.id);
+
+      if (cartItem) {
+        return { ...product, quantity: cartItem.quantity };
+      } else {
+        return product;
+      }
+    });
+
+    setProducts(updatedProducts);
+  }
+
+  useEffect(() => {
+    productList();
+  }, [cart]);
+
   // useEffect(() => {
   //   if (cart?.length > 0) {
   //     localStorage.setItem("@coffe-delivery", JSON.stringify(cart));
@@ -81,9 +103,11 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
     <ProductsContext.Provider
       value={{
         cart,
+        products,
         addProductToCart,
         removeProductToCart,
         removeUniqueProductToCart,
+        productList,
       }}
     >
       {children}

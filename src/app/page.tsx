@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 import { CardCatalog } from "@/components/CardCatalog";
-import { COFFES } from "@/mocks/coffes";
+import { useProducts } from "@/hooks/useProducts";
 import coffeMainImg from "../../public/assets/images/coffe main.png";
 import cartImg from "../../public/icons/cart.svg";
 import coffeImg from "../../public/icons/coffe.svg";
@@ -11,6 +11,8 @@ import deliveryImg from "../../public/icons/delivery.svg";
 import packagingImg from "../../public/icons/packaging.svg";
 
 export default function Home() {
+  const { products } = useProducts();
+
   return (
     <main className="flex justify-between flex-col">
       <section className="w-full flex-col-reverse  md:flex-row  md:h-[544px] flex justify-between items-center px-4 lg:px-0">
@@ -103,7 +105,7 @@ export default function Home() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 mt-14 gap-8 ">
-          {COFFES.map((coffe) => (
+          {products.map((coffe) => (
             <CardCatalog key={coffe.id} product={coffe} />
           ))}
         </div>
