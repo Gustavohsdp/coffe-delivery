@@ -108,7 +108,7 @@ export default function Checkout() {
                 <div className="mt-8 flex flex-col gap-4">
                   <div className="w-full flex flex-col gap-1">
                     <input
-                      type="number"
+                      type="text"
                       id="cep"
                       {...register("cep")}
                       placeholder="CEP"
@@ -143,7 +143,7 @@ export default function Checkout() {
                   </div>
 
                   <div className=" flex flex-col md:flex-row items-center gap-4">
-                    <div className="w-full flex flex-col gap-1">
+                    <div className="w-full md:w-[200px] flex flex-col gap-1">
                       <input
                         type="number"
                         id="number"
@@ -180,8 +180,8 @@ export default function Checkout() {
                     </div>
                   </div>
 
-                  <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4">
-                    <div className="w-full flex flex-col gap-1">
+                  <div className="w-full  flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div className="w-full  md:w-[200px] flex flex-col gap-1">
                       <input
                         type="text"
                         id="neighborhood"
@@ -205,7 +205,7 @@ export default function Checkout() {
                         id="city"
                         {...register("city")}
                         placeholder="Cidade"
-                        className={`w-full h-11 rounded-[4px] form-input bg-brown-200 p-3 border-[1px] border-solid border-brown-300 focus:outline-none focus:border-yellow-900 font-normal text-brown-600 text-sm`}
+                        className={` h-11 rounded-[4px] form-input bg-brown-200 p-3 border-[1px] border-solid border-brown-300 focus:outline-none focus:border-yellow-900 font-normal text-brown-600 text-sm`}
                       />
 
                       {errors.city && (
@@ -215,7 +215,7 @@ export default function Checkout() {
                       )}
                     </div>
 
-                    <div className="w-full flex flex-col gap-1">
+                    <div className="w-full md:w-[60px] flex flex-col gap-1">
                       <input
                         type="text"
                         id="uf"
