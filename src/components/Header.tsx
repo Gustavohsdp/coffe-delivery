@@ -17,7 +17,7 @@ export function Header() {
   }
 
   return (
-    <div className="w-full  py-8 fixed backdrop-blur-xl z-10">
+    <div className="w-full py-8 px-4 lg:px-0 fixed backdrop-blur-xl z-10">
       <div className="flex flex-row items-center justify-between mx-auto max-w-[1120px]">
         <button onClick={handleHomePage}>
           {" "}
