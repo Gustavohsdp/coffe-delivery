@@ -8,8 +8,8 @@ import paymentImg from "../../../public/icons/payment.svg";
 export default function Success() {
   return (
     <main className="flex justify-between flex-col">
-      <section className="w-full h-[544px] flex flex-row justify-between items-center ">
-        <div className="max-w-[588px]">
+      <section className="w-full h-screen md:h-[544px]  flex flex-col md:flex-row justify-between items-center px-4 lg:px-0">
+        <div className="w-full md:max-w-[588px] ">
           <div className="flex flex-col gap-1">
             <h1 className="font-extrabold font-baloo2 text-[32px] text-yellow-900">
               Uhu! Pedido confirmado
@@ -20,7 +20,7 @@ export default function Success() {
           </div>
 
           {/* </div> <div className="flex flex-col gap-8 p-10 w-[526px] h-[270px] border-gradient mt-10 rounded-tr-xl rounded-tl-md rounded-bl-xl rounded-br-md"> */}
-          <div className="flex flex-col gap-6 p-10 w-[526px] h-[270px] border-[1px] border-solid border-purple-900 mt-10 rounded-tr-[36px] rounded-tl-md  rounded-bl-[36px]  rounded-br-md">
+          <div className="flex flex-col gap-6 p-10 w-full md:w-[526px] md:h-[270px] border-[1px] border-solid border-purple-900 mt-10 rounded-tr-[36px] rounded-tl-md  rounded-bl-[36px]  rounded-br-md">
             <div className="flex gap-3 items-center">
               <Image alt="cart" src={locationImg} height={32} width={32} />
               <div>
@@ -62,7 +62,7 @@ export default function Success() {
           </div>
         </div>
 
-        <div>
+        <div className="pb-32 md:pb-0">
           <Image
             alt="cart"
             src={deliveryIllustration}
