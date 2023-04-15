@@ -16,10 +16,10 @@ export default function Home() {
       <section className="w-full flex-col-reverse  md:flex-row  md:h-[544px] flex justify-between items-center px-4 lg:px-0">
         <div className="max-w-[588px] ">
           <div className="flex flex-col gap-4">
-            <h1 className="font-extrabold font-baloo2 text-5xl text-brown-900">
+            <h1 className="font-extrabold font-baloo2 text-3xl  md:text-5xl text-brown-900">
               Encontre o café perfeito para qualquer hora do dia
             </h1>
-            <p className="text-xl font-normal text-brown-900">
+            <p className="text-lg md:text-xl font-normal text-brown-900">
               Com o Coffee Delivery você recebe seu café onde estiver, a
               qualquer hora
             </p>
@@ -68,9 +68,9 @@ export default function Home() {
       </section>
 
       <section className="py-8 pb-32 px-4 lg:px-0">
-        <h1 className="text-3xl font-baloo2 font-bold text-brown-700">
+        <h2 className="text-2xl md:text-3xl font-baloo2 font-bold text-brown-700">
           Nossos cafés
-        </h1>
+        </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 mt-14 gap-8 ">
           {COFFES.map((coffe) => (

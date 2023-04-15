@@ -10,12 +10,12 @@ interface CardCatalogProps {
 
 export function CardCatalog({ product }: CardCatalogProps) {
   return (
-    <div className="bg-brown-100 w-full h-80  rounded-es-[36px] rounded-tr-[36px] rounded-tl-md px-5  rounded-br-md relative">
-      <div className="absolute top-[-20px] left-16">
+    <div className="bg-brown-100 w-full h-80  rounded-es-[36px] rounded-tr-[36px] rounded-tl-md px-5  rounded-br-md">
+      <div className="flex justify-center items-center mt-[-20px]">
         <Image alt="café" src={product.image} width="120" height="120" />
       </div>
 
-      <div className=" mt-[112px] flex justify-center items-center gap-1">
+      <div className="mt-3 flex justify-center items-center gap-1">
         {product.label.map((item) => (
           <Label key={item} title={item} />
         ))}
