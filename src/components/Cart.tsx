@@ -14,7 +14,13 @@ export function Cart({ product }: CartProps) {
   return (
     <div className="w-full md:w-[368px] h-20 py-2 px-1 bg-brown-100 rounded-md flex flex-col md:flex-row justify-between">
       <div className="flex flex-row gap-5">
-        <Image alt="café" src={product.image} width="64" height="64" />
+        <Image
+          alt="café"
+          src={product.image}
+          width="64"
+          height="64"
+          quality={100}
+        />
 
         <div className="flex flex-col gap-2">
           <p className="text-base font-normal text-brown-700">

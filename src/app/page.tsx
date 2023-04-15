@@ -28,14 +28,26 @@ export default function Home() {
           <div className="flex flex-col gap-2 md:gap-5">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-6 md:mt-16">
               <div className="flex items-center gap-3">
-                <Image alt="cart" src={cartImg} height={32} width={32} />
+                <Image
+                  alt="cart"
+                  src={cartImg}
+                  height={32}
+                  width={32}
+                  quality={100}
+                />
 
                 <span className="text-base text-brown-600">
                   Compra simples e segura
                 </span>
               </div>
               <div className="flex items-center gap-3">
-                <Image alt="cart" src={packagingImg} height={32} width={32} />
+                <Image
+                  alt="cart"
+                  src={packagingImg}
+                  height={32}
+                  width={32}
+                  quality={100}
+                />
 
                 <span className="text-base text-brown-600">
                   Embalagem mantém o café intacto
@@ -45,14 +57,26 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div className="flex items-center gap-3">
-                <Image alt="cart" src={deliveryImg} height={32} width={32} />
+                <Image
+                  alt="cart"
+                  src={deliveryImg}
+                  height={32}
+                  width={32}
+                  quality={100}
+                />
 
                 <span className="text-base text-brown-600">
                   Entrega rápida e rastreada
                 </span>
               </div>
               <div className="flex items-center gap-3">
-                <Image alt="cart" src={coffeImg} height={32} width={32} />
+                <Image
+                  alt="cart"
+                  src={coffeImg}
+                  height={32}
+                  width={32}
+                  quality={100}
+                />
 
                 <span className="text-base text-brown-600">
                   Compra simples e segura
@@ -63,7 +87,13 @@ export default function Home() {
         </div>
 
         <div className="pb-6 md:pb-0">
-          <Image src={coffeMainImg} alt="Coffe main" width={476} height={360} />
+          <Image
+            src={coffeMainImg}
+            alt="Coffe main"
+            width={476}
+            height={360}
+            quality={100}
+          />
         </div>
       </section>
 

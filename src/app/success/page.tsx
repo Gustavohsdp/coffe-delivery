@@ -22,7 +22,13 @@ export default function Success() {
           {/* </div> <div className="flex flex-col gap-8 p-10 w-[526px] h-[270px] border-gradient mt-10 rounded-tr-xl rounded-tl-md rounded-bl-xl rounded-br-md"> */}
           <div className="flex flex-col gap-6 p-10 w-full md:w-[526px] md:h-[270px] border-[1px] border-solid border-purple-900 mt-10 rounded-tr-[36px] rounded-tl-md  rounded-bl-[36px]  rounded-br-md">
             <div className="flex gap-3 items-center">
-              <Image alt="cart" src={locationImg} height={32} width={32} />
+              <Image
+                alt="cart"
+                src={locationImg}
+                height={32}
+                width={32}
+                quality={100}
+              />
               <div>
                 <p className="text-base text-brown-600 font-normal">
                   Entrega em{" "}
@@ -37,7 +43,13 @@ export default function Success() {
             </div>
 
             <div className="flex gap-3 items-center">
-              <Image alt="cart" src={deliveryImg} height={32} width={32} />
+              <Image
+                alt="cart"
+                src={deliveryImg}
+                height={32}
+                width={32}
+                quality={100}
+              />
               <div>
                 <p className="text-base text-brown-600 font-normal">
                   Previsão de entrega
@@ -49,7 +61,13 @@ export default function Success() {
             </div>
 
             <div className="flex gap-3 items-center">
-              <Image alt="cart" src={paymentImg} height={32} width={32} />
+              <Image
+                alt="cart"
+                src={paymentImg}
+                height={32}
+                width={32}
+                quality={100}
+              />
               <div>
                 <p className="text-base text-brown-600 font-normal">
                   Pagamento na entrega
@@ -68,6 +86,7 @@ export default function Success() {
             src={deliveryIllustration}
             height={293}
             width={492}
+            quality={100}
           />
         </div>
       </section>

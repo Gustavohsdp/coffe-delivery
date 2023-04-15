@@ -12,7 +12,13 @@ export function CardCatalog({ product }: CardCatalogProps) {
   return (
     <div className="bg-brown-100 w-full h-80  rounded-es-[36px] rounded-tr-[36px] rounded-tl-md px-5  rounded-br-md">
       <div className="flex justify-center items-center mt-[-20px]">
-        <Image alt="café" src={product.image} width="120" height="120" />
+        <Image
+          alt="café"
+          src={product.image}
+          width="120"
+          height="120"
+          quality={100}
+        />
       </div>
 
       <div className="mt-3 flex justify-center items-center gap-1">
