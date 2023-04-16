@@ -85,7 +85,7 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
   }, [cart]);
 
   useEffect(() => {
-    if (cart?.length > 0) {
+    if (cart && cart?.length > 0) {
       localStorage.setItem("@coffe-delivery", JSON.stringify(cart));
     }
   }, [cart]);
@@ -94,7 +94,7 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
     const storage = localStorage.getItem("@coffe-delivery");
     const cartStorage = storage ? JSON.parse(storage) : null;
 
-    if (cartStorage.length > 0) {
+    if (cartStorage && cartStorage.length > 0) {
       cartStorage?.forEach((item: Product) => addProductToCart(item, true));
       productList(cartStorage);
     }

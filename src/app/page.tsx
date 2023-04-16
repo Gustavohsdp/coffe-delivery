@@ -105,7 +105,7 @@ export default function Home() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 mt-14 gap-8 ">
-          {products.length > 0
+          {products && products.length > 0
             ? products.map((coffe) => (
                 <CardCatalog key={coffe.id} product={coffe} />
               ))
