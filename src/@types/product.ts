@@ -6,4 +6,5 @@ export interface Product {
   value: string;
   image: string;
   quantity: number
+  maxQuantity: number
 }

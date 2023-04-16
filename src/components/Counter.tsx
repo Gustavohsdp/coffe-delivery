@@ -21,8 +21,10 @@ export function Counter({ product }: CounterProps) {
   }
 
   function handleIncreaseCount() {
-    setCounter((prevState) => prevState + 1);
-    addProductToCart(product);
+    if (product.maxQuantity !== counter) {
+      setCounter((prevState) => prevState + 1);
+      addProductToCart(product);
+    }
   }
 
   return (
@@ -45,7 +47,11 @@ export function Counter({ product }: CounterProps) {
       <button
         type="button"
         onClick={handleIncreaseCount}
-        className="text-purple-400 hover:text-purple-900"
+        className={`${
+          product.maxQuantity === counter
+            ? "text-gray-400 cursor-not-allowed"
+            : "text-purple-400 hover:text-purple-900"
+        } `}
       >
         <Plus size={14} />
       </button>

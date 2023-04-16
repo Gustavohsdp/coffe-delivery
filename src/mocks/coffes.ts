@@ -7,6 +7,7 @@ export const COFFES = [
     value: "9,90",
     image: "/assets/images/Expresso.png",
     quantity: 0,
+    maxQuantity: 10,
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ export const COFFES = [
     value: "32,90",
     image: "/assets/images/Americano.png",
     quantity: 0,
+    maxQuantity: 2,
   },
   {
     id: 3,
@@ -25,6 +27,7 @@ export const COFFES = [
     value: "69,90",
     image: "/assets/images/Expresso Cremoso.png",
     quantity: 0,
+    maxQuantity: 3,
   },
   {
     id: 4,
@@ -34,6 +37,7 @@ export const COFFES = [
     value: "9,90",
     image: "/assets/images/Café Gelado.png",
     quantity: 0,
+    maxQuantity: 4,
   },
   {
     id: 5,
@@ -43,6 +47,7 @@ export const COFFES = [
     value: "45,70",
     image: "/assets/images/Café com Leite.png",
     quantity: 0,
+    maxQuantity: 5,
   },
   {
     id: 6,
@@ -53,6 +58,7 @@ export const COFFES = [
     value: "2,90",
     image: "/assets/images/Latte.png",
     quantity: 0,
+    maxQuantity: 6,
   },
   {
     id: 7,
@@ -63,6 +69,7 @@ export const COFFES = [
     value: "9,90",
     image: "/assets/images/Capuccino.png",
     quantity: 0,
+    maxQuantity: 7,
   },
   {
     id: 8,
@@ -73,6 +80,7 @@ export const COFFES = [
     value: "9,90",
     image: "/assets/images/Macchiato.png",
     quantity: 0,
+    maxQuantity: 8,
   },
   {
     id: 9,
@@ -82,6 +90,7 @@ export const COFFES = [
     value: "8,90",
     image: "/assets/images/Mochaccino.png",
     quantity: 0,
+    maxQuantity: 9,
   },
   {
     id: 10,
@@ -91,6 +100,7 @@ export const COFFES = [
     value: "17,90",
     image: "/assets/images/Chocolate Quente.png",
     quantity: 0,
+    maxQuantity: 10,
   },
   {
     id: 11,
@@ -101,6 +111,7 @@ export const COFFES = [
     value: "9,90",
     image: "/assets/images/Cubano.png",
     quantity: 0,
+    maxQuantity: 11,
   },
   {
     id: 12,
@@ -110,6 +121,7 @@ export const COFFES = [
     value: "9,90",
     image: "/assets/images/Havaiano.png",
     quantity: 0,
+    maxQuantity: 12,
   },
   {
     id: 13,
@@ -119,6 +131,7 @@ export const COFFES = [
     value: "14,90",
     image: "/assets/images/Árabe.png",
     quantity: 0,
+    maxQuantity: 13,
   },
   {
     id: 14,
@@ -128,5 +141,6 @@ export const COFFES = [
     value: "54,27",
     image: "/assets/images/Irlandês.png",
     quantity: 0,
+    maxQuantity: 14,
   },
 ];
