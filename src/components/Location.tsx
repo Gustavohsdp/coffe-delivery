@@ -37,7 +37,7 @@ export function Location() {
         </div>
       ) : (
         <div className="flex items-center justify-center">
-          <div className="h-10 w-[200px] bg-purple-100 rounded-md p-2 flex flex-row gap-2 items-center animate-pulse "></div>
+          <div className="h-10 w-[200px] bg-brown-300 animate-pulse rounded-md p-2 flex flex-row gap-2 items-center"></div>
         </div>
       )}
     </>
