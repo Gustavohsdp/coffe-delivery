@@ -86,7 +86,7 @@ export default function Checkout() {
     <main className="flex justify-between flex-col">
       <form onSubmit={handleSubmit(onSubmit)}>
         <section className="w-full flex flex-col md:flex-row justify-between items-start pb-32 px-4 lg:px-0">
-          <div className="w-full md:max-w-[640px]">
+          <div className=" md:sticky md:top-28 w-full md:max-w-[640px]">
             <h1 className="text-lg font-baloo2 text-brown-700 font-bold">
               Complete seu pedido
             </h1>
