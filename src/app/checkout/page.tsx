@@ -7,6 +7,7 @@ import { useProducts } from "@/hooks/useProducts";
 import { PAYMENT_METHODS } from "@/mocks/payment-methods";
 import { formatCurrency } from "@/utils/formatCurrency";
 import { zodResolver } from "@hookform/resolvers/zod";
+import cogoToast from "cogo-toast";
 import { DollarSign, MapPin } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -47,7 +48,7 @@ export default function Checkout() {
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState<PaymentMethodProps | null>(null);
 
-  const { cart } = useProducts();
+  const { cart, createOrder } = useProducts();
 
   const router = useRouter();
 
@@ -77,7 +78,28 @@ export default function Checkout() {
   });
 
   const onSubmit = (data: FormValues) => {
-    console.log(data);
+    const order = {
+      customer: {
+        cep: data.cep,
+        address: data.address,
+        number: data.number,
+        complement: data.complement,
+        neighborhood: data.neighborhood,
+        city: data.city,
+        uf: data.uf,
+      },
+      itens: cart,
+      PaymentMethod: selectedPaymentMethod,
+    };
+
+    try {
+      createOrder(order);
+      cogoToast.success("Pedido criado com sucesso", {
+        position: "top-right",
+      });
+    } catch (err) {
+      console.log(err);
+    }
 
     handleNavigateSuccessPage();
   };

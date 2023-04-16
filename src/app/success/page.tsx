@@ -1,11 +1,16 @@
+"use client";
+
 import Image from "next/image";
 
+import { useProducts } from "@/hooks/useProducts";
 import deliveryIllustration from "../../../public/assets/images/delivery_Illustration.svg";
 import deliveryImg from "../../../public/icons/delivery.svg";
 import locationImg from "../../../public/icons/location.svg";
 import paymentImg from "../../../public/icons/payment.svg";
 
 export default function Success() {
+  const { order } = useProducts();
+
   return (
     <main className="flex justify-between flex-col">
       <section className="w-full h-screen md:h-[544px]  flex flex-col md:flex-row justify-between items-center px-4 lg:px-0">
@@ -33,11 +38,13 @@ export default function Success() {
                 <p className="text-base text-brown-600 font-normal">
                   Entrega em{" "}
                   <span className="text-base text-brown-600 font-bold">
-                    Rua João Daniel Martinelli, 102
+                    {`${order?.customer.address},${order?.customer.number} `}
                   </span>
                 </p>
                 <span className="text-base text-brown-600 font-normal">
-                  Farrapos - Porto Alegre, RS
+                  {`${order?.customer.neighborhood} - ${
+                    order?.customer.city
+                  }, ${order?.customer.uf.toUpperCase()} `}
                 </span>
               </div>
             </div>
@@ -73,7 +80,7 @@ export default function Success() {
                   Pagamento na entrega
                 </p>
                 <span className="text-base text-brown-600 font-bold">
-                  Cartão de Crédito
+                  {order?.PaymentMethod?.method}
                 </span>
               </div>
             </div>

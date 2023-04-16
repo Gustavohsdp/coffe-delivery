@@ -1,5 +1,6 @@
 "use client";
 
+import { Order } from "@/@types/order";
 import { Product } from "@/@types/product";
 import { COFFES } from "@/mocks/coffes";
 import { createContext, useEffect, useState, type ReactNode } from "react";
@@ -8,11 +9,13 @@ interface IProductsContextData {
   // state
   cart: Product[];
   products: Product[];
+  order: Order | null;
 
   // functions
   addProductToCart: (product: Product) => void;
   removeProductToCart: (product: Product) => void;
   removeUniqueProductToCart: (product: Product) => void;
+  createOrder: (order: Order) => void;
 }
 
 const ProductsContext = createContext({} as IProductsContextData);
@@ -20,6 +23,7 @@ const ProductsContext = createContext({} as IProductsContextData);
 const ProductsProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<Product[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
+  const [order, setOrder] = useState<Order | null>(null);
 
   function addProductToCart(product: Product) {
     const productAlreadyAdd = cart?.find((item) => item.id === product.id);
@@ -81,13 +85,19 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
     setProducts(updatedProducts);
   }
 
-  useEffect(() => {
-    productList(cart);
-  }, [cart]);
-
   function addItemLocalStorage(cart: Product[]) {
     localStorage.setItem("@coffe-delivery", JSON.stringify(cart));
   }
+
+  function createOrder(order: Order) {
+    setOrder(order);
+    setCart([]);
+    localStorage.removeItem("@coffe-delivery");
+  }
+
+  useEffect(() => {
+    productList(cart);
+  }, [cart]);
 
   useEffect(() => {
     const storage = localStorage.getItem("@coffe-delivery");
@@ -104,9 +114,11 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
       value={{
         cart,
         products,
+        order,
         addProductToCart,
         removeProductToCart,
         removeUniqueProductToCart,
+        createOrder,
       }}
     >
       {children}
