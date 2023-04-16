@@ -105,9 +105,16 @@ export default function Home() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 mt-14 gap-8 ">
-          {products.map((coffe) => (
-            <CardCatalog key={coffe.id} product={coffe} />
-          ))}
+          {products.length > 0
+            ? products.map((coffe) => (
+                <CardCatalog key={coffe.id} product={coffe} />
+              ))
+            : [1, 2, 3, 4].map((skeleton) => (
+                <div
+                  key={skeleton}
+                  className="bg-brown-300 animate-pulse  w-full h-80  rounded-es-[36px] rounded-tr-[36px] rounded-tl-md px-5  rounded-br-md"
+                />
+              ))}
         </div>
       </section>
     </main>
