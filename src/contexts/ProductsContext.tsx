@@ -21,7 +21,7 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<Product[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
 
-  function addProductToCart(product: Product, storage?: boolean) {
+  function addProductToCart(product: Product) {
     const productAlreadyAdd = cart?.find((item) => item.id === product.id);
 
     if (productAlreadyAdd) {
@@ -34,13 +34,11 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
           : item
       );
       setCart(updatedCart);
+      addItemLocalStorage(updatedCart);
     } else {
-      if (storage) {
-        setCart([...cart, product]);
-      } else {
-        const newProduct = { ...product, quantity: 1 };
-        setCart([...cart, newProduct]);
-      }
+      const newProduct = { ...product, quantity: 1 };
+      setCart([...cart, newProduct]);
+      addItemLocalStorage([...cart, newProduct]);
     }
   }
 
@@ -50,17 +48,20 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
     if (productAddedToCart?.quantity === 1) {
       const updatedCart = cart?.filter((item) => item.id !== product.id);
       setCart(updatedCart);
+      addItemLocalStorage(updatedCart);
     } else {
       const updatedCart = cart?.map((item) =>
         item.id === product.id ? { ...item, quantity: item.quantity - 1 } : item
       );
       setCart(updatedCart);
+      addItemLocalStorage(updatedCart);
     }
   }
 
   function removeUniqueProductToCart(product: Product) {
     const updatedCart = cart?.filter((item) => item.id !== product.id);
     setCart(updatedCart);
+    addItemLocalStorage(updatedCart);
   }
 
   function productList(cartStorage: Product[]) {
@@ -84,18 +85,16 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
     productList(cart);
   }, [cart]);
 
-  useEffect(() => {
-    if (cart && cart?.length > 0) {
-      localStorage.setItem("@coffe-delivery", JSON.stringify(cart));
-    }
-  }, [cart]);
+  function addItemLocalStorage(cart: Product[]) {
+    localStorage.setItem("@coffe-delivery", JSON.stringify(cart));
+  }
 
   useEffect(() => {
     const storage = localStorage.getItem("@coffe-delivery");
     const cartStorage = storage ? JSON.parse(storage) : null;
 
     if (cartStorage && cartStorage.length > 0) {
-      cartStorage?.forEach((item: Product) => addProductToCart(item, true));
+      setCart(cartStorage);
       productList(cartStorage);
     }
   }, []);
