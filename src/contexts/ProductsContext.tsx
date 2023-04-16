@@ -13,7 +13,6 @@ interface IProductsContextData {
   addProductToCart: (product: Product) => void;
   removeProductToCart: (product: Product) => void;
   removeUniqueProductToCart: (product: Product) => void;
-  productList: () => void;
 }
 
 const ProductsContext = createContext({} as IProductsContextData);
@@ -64,9 +63,13 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
     setCart(updatedCart);
   }
 
-  function productList() {
+  function productList(cartStorage: Product[]) {
     const updatedProducts = COFFES.map((product) => {
-      const cartItem = cart.find((item) => item.id === product.id);
+      let cartItem = null;
+
+      if (cartStorage && cartStorage.length > 0) {
+        cartItem = cartStorage.find((item) => item.id === product.id);
+      }
 
       if (cartItem) {
         return { ...product, quantity: cartItem.quantity };
@@ -74,30 +77,28 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
         return product;
       }
     });
-
     setProducts(updatedProducts);
   }
 
   useEffect(() => {
-    productList();
+    productList(cart);
   }, [cart]);
 
-  // useEffect(() => {
-  //   if (cart?.length > 0) {
-  //     localStorage.setItem("@coffe-delivery", JSON.stringify(cart));
-  //   }
-  // }, [cart]);
+  useEffect(() => {
+    if (cart?.length > 0) {
+      localStorage.setItem("@coffe-delivery", JSON.stringify(cart));
+    }
+  }, [cart]);
 
-  // useEffect(() => {
-  //   const storage = localStorage.getItem("@coffe-delivery");
-  //   const cartStorage = storage && JSON.parse(storage);
+  useEffect(() => {
+    const storage = localStorage.getItem("@coffe-delivery");
+    const cartStorage = storage ? JSON.parse(storage) : null;
 
-  //   if (cartStorage.length > 0) {
-  //     cartStorage?.forEach((item: Product) => addProductToCart(item, true));
-  //   }
-
-  //   setCart(cartStorage);
-  // }, []);
+    if (cartStorage.length > 0) {
+      cartStorage?.forEach((item: Product) => addProductToCart(item, true));
+      productList(cartStorage);
+    }
+  }, []);
 
   return (
     <ProductsContext.Provider
@@ -107,7 +108,6 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
         addProductToCart,
         removeProductToCart,
         removeUniqueProductToCart,
-        productList,
       }}
     >
       {children}
