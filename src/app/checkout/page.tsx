@@ -47,6 +47,7 @@ export interface PaymentMethodProps {
 export default function Checkout() {
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState<PaymentMethodProps | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { cart, createOrder } = useProducts();
 
@@ -77,7 +78,7 @@ export default function Checkout() {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     const order = {
       customer: {
         cep: data.cep,
@@ -93,10 +94,19 @@ export default function Checkout() {
     };
 
     try {
-      createOrder(order);
+      setIsLoading(true);
+      await new Promise<void>((resolve) =>
+        setTimeout(() => {
+          createOrder(order);
+          resolve();
+        }, 2000)
+      );
+
       cogoToast.success("Pedido criado com sucesso", {
         position: "top-right",
       });
+
+      setIsLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -324,6 +334,7 @@ export default function Checkout() {
                   type="submit"
                   title="Confirmar pedido"
                   isBlocked={cart && cart?.length === 0}
+                  isLoading={isLoading}
                 />
               </div>
             </div>
